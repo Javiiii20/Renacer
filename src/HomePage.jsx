@@ -4,7 +4,7 @@ import { Body } from './components/Body';
 import Formulario from './components/Formulario';
 
  
-export const HomePage =  ({ isLoggedIn }) => {
+export const HomePage =  () => {
   return (
     <>
       <div style={{ background: 'white', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', padding: '32px', gap: '16px' }}>

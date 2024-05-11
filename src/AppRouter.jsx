@@ -7,21 +7,18 @@ import { HomePage } from './HomePage';
 export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // Función para manejar el inicio de sesión
     const handleLogin = () => {
       setIsLoggedIn(true);
     };
   
-    // Función para manejar el cierre de sesión
     const handleLogout = () => {
       setIsLoggedIn(false);
     };
-    console.log('routes succes')
   return (
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/login" element={<LoginPage />} />
-        </Routes>
+    <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="/login" />} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+    </Routes>
   )
 }
