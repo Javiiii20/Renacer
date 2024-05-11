@@ -12,7 +12,7 @@ function LoginPage({ onLogin }) {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:3001/login', {
+      const response = await fetch('https://rbackend-xo9l.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
