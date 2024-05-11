@@ -16,6 +16,7 @@ export const AppRouter = () => {
     const handleLogout = () => {
       setIsLoggedIn(false);
     };
+    console.log('routes succes')
   return (
         <Routes>
             <Route path="/" element={<HomePage />} />
