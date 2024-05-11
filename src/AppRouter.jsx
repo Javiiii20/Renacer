@@ -4,6 +4,9 @@ import AdminPage from './components/AdminPage';
 import LoginPage from './components/LoginPage';
 import { HomePage } from './HomePage';
 
+import Header from './components/Header';
+import { Footer } from './components/Footer';
+
 export const AppRouter = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -15,10 +18,14 @@ export const AppRouter = () => {
       setIsLoggedIn(false);
     };
   return (
-    <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="/login" />} />
-        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-    </Routes>
+    <>
+        <Header />
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="/login" />} />
+            <Route path="login" element={<LoginPage onLogin={handleLogin} />} />
+        </Routes>
+        <Footer />
+    </>
   )
 }
