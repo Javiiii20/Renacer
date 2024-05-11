@@ -18,7 +18,7 @@ const Formulario = () => {
     const inputFecha = document.getElementById("fecha");
 
     const validarFecha = () => {
-      const fechaSeleccionada = new Date(fecha);
+      const fechaSeleccionada = new Date(inputFecha.value);
       const dia = fechaSeleccionada.getDay();
       setEsFinDeSemana(dia === 5 || dia === 6);
     };
@@ -28,8 +28,9 @@ const Formulario = () => {
     return () => {
       inputFecha.removeEventListener("input", validarFecha);
     }
-  }, [fecha]);
+  }, []);
 
+  // Handler para el envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -131,4 +132,3 @@ const Formulario = () => {
 };
 
 export default Formulario;
-
