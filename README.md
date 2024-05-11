@@ -1,2 +1,0 @@
-# Renacer
-Proyecto de Graduación
