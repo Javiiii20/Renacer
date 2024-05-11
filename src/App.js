@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import { Footer } from './components/Footer';
 import MediaCard from './components/MediaCard';
@@ -27,9 +27,9 @@ function App() {
       <div>
         <Header />
         <Routes>
-          <Route path="#/" element={<HomePage isLoggedIn={isLoggedIn} />} />
-          <Route path="#/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="#/login" />} />
-          <Route path="#/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
+          <Route path="/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         </Routes>
         <Footer />
       </div>
