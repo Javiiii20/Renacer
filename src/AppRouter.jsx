@@ -17,12 +17,10 @@ export const AppRouter = () => {
       setIsLoggedIn(false);
     };
   return (
-    <>
         <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/login" element={<LoginPage />} />
         </Routes>
-    </>
   )
 }
