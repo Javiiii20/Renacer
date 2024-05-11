@@ -28,8 +28,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
-          <Route path="https://clinicarenacergt.onrender.com/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="https://clinicarenacergt.onrender.com/login" />} />
-          <Route path="https://clinicarenacergt.onrender.com/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         </Routes>
         <Footer />
       </div>
