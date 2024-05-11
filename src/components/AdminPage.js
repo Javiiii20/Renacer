@@ -8,7 +8,7 @@ function AdminPage() {
 
   useEffect(() => {
     if (fechaSeleccionada) {
-      axios.get(`http://localhost:3001/api/citas/fecha?fecha=${fechaSeleccionada}`)
+      axios.get(`hhttps://rbackend-xo9l.onrender.com/api/citas/fecha?fecha=${fechaSeleccionada}`)
         .then(response => {
           // Formatear las fechas antes de almacenarlas en el estado local
           const citasFormateadas = response.data.map(cita => {

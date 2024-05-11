@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7c684a42.css",
+    "main.js": "/static/js/main.0c1bb54a.js",
+    "static/js/453.a550419b.chunk.js": "/static/js/453.a550419b.chunk.js",
+    "static/media/sala.jpg": "/static/media/sala.e1dbdfdeb6c305ae69d8.jpg",
+    "index.html": "/index.html",
+    "main.7c684a42.css.map": "/static/css/main.7c684a42.css.map",
+    "main.0c1bb54a.js.map": "/static/js/main.0c1bb54a.js.map",
+    "453.a550419b.chunk.js.map": "/static/js/453.a550419b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7c684a42.css",
+    "static/js/main.0c1bb54a.js"
+  ]
+}

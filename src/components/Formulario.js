@@ -53,7 +53,7 @@ const Formulario = () => {
         hora,
       };
 
-      const ocupadoResponse = await axios.get(`http://localhost:3001/api/citas/disponibilidad`, { params: { fecha, hora } });
+      const ocupadoResponse = await axios.get(`https://rbackend-xo9l.onrender.com/api/citas/disponibilidad`, { params: { fecha, hora } });
       if (ocupadoResponse.data.disponible === true) {
         Swal.fire({
           icon: 'error',
@@ -63,7 +63,7 @@ const Formulario = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:3001/api/citas', formData);
+      const response = await axios.post('https://rbackend-xo9l.onrender.com/api/citas', formData);
 
       if (response.status === 200) {
         Swal.fire({
