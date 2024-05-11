@@ -1,41 +1,10 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Header from './components/Header';
-import { Footer } from './components/Footer';
 import MediaCard from './components/MediaCard';
 import GoogleMap from './components/GoogleMap';
 import { Body } from './components/Body';
 import Formulario from './components/Formulario';
-import AdminPage from './components/AdminPage';
-import LoginPage from './components/LoginPage';
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Función para manejar el inicio de sesión
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  // Función para manejar el cierre de sesión
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
-  return (
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
-          <Route path="/admin" element={isLoggedIn ? <AdminPage onLogout={handleLogout} /> : <Navigate to="/login" />} />
-          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-        </Routes>
-        <Footer />
-      </div>
-  );
-}
-
-function HomePage({ isLoggedIn }) {
+ 
+export const HomePage =  ({ isLoggedIn }) => {
   return (
     <>
       <div style={{ background: 'white', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', padding: '32px', gap: '16px' }}>
@@ -62,4 +31,3 @@ function HomePage({ isLoggedIn }) {
   );
 }
 
-export default App;
