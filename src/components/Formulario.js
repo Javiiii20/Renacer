@@ -9,7 +9,7 @@ const Formulario = () => {
   const [motivo, setMotivo] = useState('');
   const [fecha, setFecha] = useState('');
   const [hora, setHora] = useState('');
-
+  const [esFinDeSemana, setEsFinDeSemana] = useState(false);
 
   // Referencia al elemento del formulario
   const ref = useRef(null);
@@ -17,22 +17,11 @@ const Formulario = () => {
   useEffect(() => {
     const inputFecha = document.getElementById("fecha");
 
-    const esFinDeSemana = (fecha) => {
-      const dia = fecha.getDay();
-      return dia === 5 || dia === 6;
-    }
-
     const validarFecha = () => {
       const fechaSeleccionada = new Date(fecha);
-      if (esFinDeSemana(fechaSeleccionada)) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'No se permiten sábados ni domingos. Por favor, selecciona otra fecha.',
-        });
-        setFecha('');
-      }
-    }
+      const dia = fechaSeleccionada.getDay();
+      setEsFinDeSemana(dia === 5 || dia === 6);
+    };
 
     inputFecha.addEventListener("input", validarFecha);
 
@@ -43,6 +32,15 @@ const Formulario = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (esFinDeSemana) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'No se permiten sábados ni domingos. Por favor, selecciona otra fecha.',
+      });
+      return;
+    }
 
     try {
       const formData = {
@@ -94,11 +92,6 @@ const Formulario = () => {
     }
   };
 
-  const esFinDeSemana = (fecha) => {
-    const dia = fecha.getDay();
-    return dia === 5 || dia === 6;
-  }
-
   return (
     <div ref={ref} id="formulario" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around", alignItems: "center", padding: "16px" }}>
       <div className={styles.contacto} style={{ maxWidth: "600px", textAlign: "center", padding: "32px" }}>
@@ -128,7 +121,6 @@ const Formulario = () => {
                 <option value="16:00">16:00</option>
                 <option value="17:00">17:00</option>
             </select>
-
           </div>
           <br />
           <button type="submit" id={styles.enviar_cita}>Agendar Cita</button>
@@ -139,3 +131,4 @@ const Formulario = () => {
 };
 
 export default Formulario;
+
