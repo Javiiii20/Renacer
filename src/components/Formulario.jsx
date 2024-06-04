@@ -4,8 +4,6 @@ import Swal from 'sweetalert2';
 import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './estilos.module.css';
 
-
-//Componente de formulario
 const Formulario = () => {
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -13,7 +11,8 @@ const Formulario = () => {
   const [fecha, setFecha] = useState('');
   const [hora, setHora] = useState('');
   const [esFinDeSemana, setEsFinDeSemana] = useState(false);
-  const [captchaValue, setCaptchaValue] = useState(null);
+  const [captchaValido, setCaptchaValido] = useState(false);
+  const recaptchaRef = useRef(null);
 
   const ref = useRef(null);
 
@@ -33,6 +32,10 @@ const Formulario = () => {
     }
   }, []);
 
+  const handleCaptchaChange = (value) => {
+    setCaptchaValido(!!value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -45,11 +48,11 @@ const Formulario = () => {
       return;
     }
 
-    if (!captchaValue) {
+    if (!captchaValido) {
       Swal.fire({
         icon: 'error',
         title: 'Oops!',
-        text: 'Por favor, verifica que no eres un robot.',
+        text: 'Por favor, confirma que no eres un robot.',
       });
       return;
     }
@@ -61,7 +64,6 @@ const Formulario = () => {
         motivo,
         fecha,
         hora,
-        captchaValue,
       };
 
       const ocupadoResponse = await axios.get(`https://rbackend-xo9l.onrender.com/api/citas/disponibilidad`, { params: { fecha, hora } });
@@ -87,7 +89,8 @@ const Formulario = () => {
         setMotivo('');
         setFecha('');
         setHora('');
-        setCaptchaValue(null); // Reiniciar el valor del captcha
+        recaptchaRef.current.reset();
+        setCaptchaValido(false);
       } else {
         Swal.fire({
           icon: 'error',
@@ -103,10 +106,6 @@ const Formulario = () => {
       });
       console.error('Error al enviar la cita:', error);
     }
-  };
-
-  const handleCaptchaChange = (value) => {
-    setCaptchaValue(value);
   };
 
   return (
@@ -139,12 +138,16 @@ const Formulario = () => {
                 <option value="17:00">17:00</option>
             </select>
           </div>
+
           <div className={styles.captchaContainer}>
             <ReCAPTCHA
-              sitekey="6Lfy__ApAAAAAErlunppdNmTp-FrAYyBVRGjJOue" //comentario
+              ref={recaptchaRef}
+              sitekey="6Lfy__ApAAAAAErlunppdNmTp-FrAYyBVRGjJOue"
               onChange={handleCaptchaChange}
             />
           </div>
+          
+          <br />
           <button type="submit" id={styles.enviar_cita}>Agendar Cita</button>
         </form>
       </section>
