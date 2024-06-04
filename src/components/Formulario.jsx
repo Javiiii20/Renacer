@@ -4,6 +4,8 @@ import Swal from 'sweetalert2';
 import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './estilos.module.css';
 
+
+//Componente de formulario
 const Formulario = () => {
   const [nombre, setNombre] = useState('');
   const [telefono, setTelefono] = useState('');
