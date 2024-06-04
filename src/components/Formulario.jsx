@@ -147,7 +147,6 @@ const Formulario = () => {
             />
           </div>
           
-          <br />
           <button type="submit" id={styles.enviar_cita}>Agendar Cita</button>
         </form>
       </section>
