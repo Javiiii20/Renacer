@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import ReCAPTCHA from 'react-google-recaptcha';
 import styles from './estilos.module.css';
 
 const Formulario = () => {
@@ -10,8 +11,8 @@ const Formulario = () => {
   const [fecha, setFecha] = useState('');
   const [hora, setHora] = useState('');
   const [esFinDeSemana, setEsFinDeSemana] = useState(false);
+  const [captchaValue, setCaptchaValue] = useState(null);
 
-  // Referencia al elemento del formulario
   const ref = useRef(null);
 
   useEffect(() => {
@@ -30,15 +31,23 @@ const Formulario = () => {
     }
   }, []);
 
-  // Handler para el envío del formulario
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (esFinDeSemana) {
       Swal.fire({
         icon: 'error',
-        title: 'Error',
+        title: 'Oops!',
         text: 'No se permiten sábados ni domingos. Por favor, selecciona otra fecha.',
+      });
+      return;
+    }
+
+    if (!captchaValue) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops!',
+        text: 'Por favor, verifica que no eres un robot.',
       });
       return;
     }
@@ -50,13 +59,14 @@ const Formulario = () => {
         motivo,
         fecha,
         hora,
+        captchaValue,
       };
 
       const ocupadoResponse = await axios.get(`https://rbackend-xo9l.onrender.com/api/citas/disponibilidad`, { params: { fecha, hora } });
       if (ocupadoResponse.data.disponible === true) {
         Swal.fire({
           icon: 'error',
-          title: 'Error',
+          title: 'Oops!',
           text: 'La hora seleccionada ya está ocupada. Por favor, elige otra hora.',
         });
         return;
@@ -70,16 +80,16 @@ const Formulario = () => {
           title: 'Éxito',
           text: 'Cita enviada correctamente',
         });
-        // Reiniciar los campos del formulario
         setNombre('');
         setTelefono('');
         setMotivo('');
         setFecha('');
         setHora('');
+        setCaptchaValue(null); // Reiniciar el valor del captcha
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Error',
+          title: 'Oops!',
           text: 'Error al enviar la cita',
         });
       }
@@ -91,6 +101,10 @@ const Formulario = () => {
       });
       console.error('Error al enviar la cita:', error);
     }
+  };
+
+  const handleCaptchaChange = (value) => {
+    setCaptchaValue(value);
   };
 
   return (
@@ -123,7 +137,12 @@ const Formulario = () => {
                 <option value="17:00">17:00</option>
             </select>
           </div>
-          <br />
+          <div className={styles.captchaContainer}>
+            <ReCAPTCHA
+              sitekey="6LfuPe8pAAAAABY54Jb89ryzoxNOjAv8EYGDGC3g"
+              onChange={handleCaptchaChange}
+            />
+          </div>
           <button type="submit" id={styles.enviar_cita}>Agendar Cita</button>
         </form>
       </section>

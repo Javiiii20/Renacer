@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 
+body{
+  background-color: rgb(236, 248, 254);
+}
+
 .text {
     max-width: 80%; /* Reducir el ancho máximo */
     margin: 0 auto; /* Centrar el componente horizontalmente */
@@ -305,6 +309,14 @@ section {
   transition: background-color 0.3s ease;
 }
 
+.captchaContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+
 .cita:hover {
   background-color: #023e8a;
 }
@@ -434,6 +446,29 @@ footer {
 
 .social_icons a:hover {
   color: #023e8a;
+}
+
+.social_icons {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra los íconos horizontalmente */
+}
+
+.social_icons a {
+  color: #03045E;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social_icons a:hover {
+  color: #023e8a;
+}
+
+.social_icon {
+  width: 40px; /* Ajusta el tamaño del ícono según sea necesario */
+  height: 40px;
+  margin: 0 10px; /* Espaciado entre íconos */
 }
 
 .copyright {
