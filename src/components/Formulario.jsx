@@ -15,7 +15,7 @@ const Formulario = () => {
   const recaptchaRef = useRef(null);
 
   const ref = useRef(null);
-
+1
   useEffect(() => {
     const inputFecha = document.getElementById("fecha");
 
@@ -142,7 +142,7 @@ const Formulario = () => {
           <div className={styles.captchaContainer}>
             <ReCAPTCHA
               ref={recaptchaRef}
-              sitekey="6Lfy__ApAAAAAErlunppdNmTp-FrAYyBVRGjJOue"
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
               onChange={handleCaptchaChange}
             />
           </div>
